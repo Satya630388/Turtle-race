@@ -1,0 +1,36 @@
+from turtle import Turtle,Screen
+import random
+screen=Screen()
+screen.setup(width=500,height=400)
+output=screen.textinput(title='GUESS THE FASTEST',prompt='Which turtle is going to win: color ? ')
+colors=[ 'red','blue','yellow','orange','purple','green']
+
+
+loop_on= False
+next=-100
+allturt=[]
+
+for i in range(0,6):
+    new_turtle=Turtle(shape='turtle')
+    new_turtle.penup()
+    new_turtle.color(colors[i])
+    new_turtle.goto(x=-230, y=next)
+    allturt.append(new_turtle)
+    next=next+30
+if output:
+    loop_on= True
+while loop_on:
+    for turtle in allturt:
+        if turtle.xcor()>230:
+            loop_on=False
+            winning=turtle.pencolor()
+            if output==winning:
+                print(f'YOU WON! THE {winning} Turtle is Winner!')
+            else:
+                print(f'YOU LOST! THE {winning} Turtle wins the race')
+
+        random_distance= random.randint(1,10)
+        turtle.forward(random_distance)
+
+
+screen.exitonclick()
